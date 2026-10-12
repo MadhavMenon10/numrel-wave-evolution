@@ -2,10 +2,10 @@
 #include <cmath>
 #include <stdexcept>
 
-Grid::Grid(double L, double dx): L_(L), dx_(dx) {
-    N_ = std::lround(L_ / dx_);
-    if ((N_ * dx_ - L_) < 0.000000001) {
-        throw std::runtime_error("Division wasn't accurate enough")
+Grid::Grid(double L, double delta_x): L_(L), delta_x_(delta_x) {
+    N_ = std::lround(L_ / delta_x_);
+    if ((N_ * delta_x_ - L_) < 0.000000001) {
+        throw std::runtime_error("Division wasn't accurate enough");
     }
 }
 
@@ -13,8 +13,8 @@ double Grid::get_L() const {
     return L_;
 }
 
-double Grid::get_dx() const {
-    return dx_;
+double Grid::get_delta_x() const {
+    return delta_x_;
 }
 
 int Grid::get_N() const {
@@ -22,7 +22,7 @@ int Grid::get_N() const {
 }
 
 double Grid::position(int i) const {
-    return i * dx_;
+    return i * delta_x_;
 }
 
 int Grid::wrap(int i) const {

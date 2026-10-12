@@ -3,9 +3,9 @@
 
 class Grid {
     public:
-        Grid(double L, double dx);
+        Grid(double L, double delta_x);
         double get_L() const;
-        double get_dx() const;
+        double get_delta_x() const;
         int get_N() const;
         double position(int i) const;
         /* Maps any integer index onto [0, N-1] by wrapping around the grid,
@@ -15,7 +15,7 @@ class Grid {
 
     private:
         double L_;
-        double dx_;
+        double delta_x_;
         int N_;
 };
 
