@@ -48,3 +48,28 @@ void WaveSolver::compute_derivatives(const std::vector<double>& phi, const std::
         dpi_dt[i] *= -1; // The stencil call doesn't negate. We have dpi/dt = -d^2phi/dx^2
     }
 }
+
+void WaveSolver::step(int stencil_order) {
+    int N {grid_.get_N()};
+    compute_derivatives(phi_, pi_, k1_.phi, k1_.pi, stencil_order);
+    for (int i {}; i < N; ++i) {
+        temp_.phi[i] = phi_[i] + delta_t_/2 * k1_.phi[i];
+        temp_.pi[i] = pi_[i] + delta_t_/2 * k1_.pi[i];
+    }
+    compute_derivatives(temp_.phi, temp_.pi, k2_.phi, k2_.pi, stencil_order);
+    for (int i {}; i < N; ++i) {
+        temp_.phi[i] = phi_[i] + delta_t_/2 * k2_.phi[i];
+        temp_.pi[i] = pi_[i] + delta_t_/2 * k2_.pi[i];
+    }
+    compute_derivatives(temp_.phi, temp_.pi, k3_.phi, k3_.pi, stencil_order);
+    for (int i {}; i < N; ++i) {
+        temp_.phi[i] = phi_[i] + delta_t_ * k3_.phi[i];
+        temp_.pi[i] = pi_[i] + delta_t_ * k3_.pi[i];
+    }
+    compute_derivatives(temp_.phi, temp_.pi, k4_.phi, k4_.pi, stencil_order);
+    for (int i {}; i < N; ++i) {
+        phi_[i] = phi_[i] + delta_t_/6 * (k1_.phi[i] + 2*k2_.phi[i] + 2*k3_.phi[i] + k4_.phi[i]);
+        pi_[i] = pi_[i] + delta_t_/6 * (k1_.pi[i] + 2*k2_.pi[i] + 2*k3_.pi[i] + k4_.pi[i]);
+    }
+    t_ += delta_t_;
+ }
