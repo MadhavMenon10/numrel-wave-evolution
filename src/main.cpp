@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
         double delta_t {std::stod(argv[2])};
         int stencil_order {std::stoi(argv[3])};
         double t_final {std::stod(argv[4])};
-        double save_interval {std::stod(argv[5])};
+        double save_interval {std::stod(argv[5])}; // delta_t for animations, t_final for convergence
         std::string output_path {argv[6]};
         if (delta_t <= 0.0 || save_interval <= 0.0) {
             throw std::invalid_argument("Delta_t or save_interval must be positive");
