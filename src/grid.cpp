@@ -7,7 +7,7 @@ Grid::Grid(double L, double delta_x): L_(L), delta_x_(delta_x) {
         throw std::runtime_error("L and/or delta_x must be positive");
     }
     N_ = static_cast<int>(std::lround(L_ / delta_x_));
-    if ((N_ * delta_x_ - L_) < 0.000000001) {
+    if (std::abs(N_ * delta_x_ - L_) > 0.000000001) {
         throw std::runtime_error("Division wasn't accurate enough");
     }
 }

@@ -2,7 +2,7 @@
 #include "stencils.hpp"
 #include <stdexcept>
 
-WaveSolver::WaveSolver(Grid grid, double delta_t, int stencil_order): grid_(grid), phi_(grid_.get_N()), pi_(grid_.get_N()), t_(0), delta_t_(delta_t), stencil_order_(stencil_order) {
+WaveSolver::WaveSolver(Grid grid, double delta_t, int stencil_order): grid_(grid), phi_(grid_.get_N()), pi_(grid_.get_N()), t_(0), delta_t_(delta_t), stencil_order_(stencil_order), k1_(grid_.get_N()), k2_(grid_.get_N()), k3_(grid_.get_N()), k4_(grid_.get_N()), temp_(grid_.get_N()) {
     if (stencil_order != 2 && stencil_order != 4) {
         throw std::invalid_argument("Invalid stencil order passed");
     }
