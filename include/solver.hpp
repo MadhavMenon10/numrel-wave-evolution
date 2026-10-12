@@ -11,6 +11,7 @@ class WaveSolver {
         const std::vector<double>& get_momentum() const;
         double get_t() const;
         void set_initial_conditions(const std::function<double(double)>& init_phi, const std::function<double(double)>& init_phit0);
+        void compute_derivatives(const std::vector<double>& phi, const std::vector<double>& pi, std::vector<double>& dphi_dt, std::vector<double>& dpi_dt, int stencil_order) const;
 
     private:
         Grid grid_;
