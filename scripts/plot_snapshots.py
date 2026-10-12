@@ -33,7 +33,7 @@ def main():
         ax.set_ylabel(r"$\Phi$")
     axes[0, 0].legend(loc = "upper right", fontsize = 8)
     fig.suptitle(
-        f"Stencil order {args.stencil_order}"
+        f"Stencil order {args.stencil_order} "
         f"(delta_x = {args.delta_x}, delta_t = {args.delta_t})"
     )
     fig.tight_layout()
