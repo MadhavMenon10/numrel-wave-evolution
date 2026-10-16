@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
             out << '\n';
         };
         write_row();
-        for (int i {}; i < num_steps; ++i) {
+        for (int i {1}; i <= num_steps; ++i) {
             solver.step(stencil_order);
             if (i % save_every == 0 || i == num_steps) {
                 write_row();
