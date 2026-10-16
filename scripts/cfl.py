@@ -54,7 +54,7 @@ def main():
     ax.grid(alpha = 0.3)
     ax.legend()
     fig.tight_layout()
-    out = FIGURE_DIR / "cfl_scan.png"
+    out = FIGURE_DIR / "cfl.png"
     fig.savefig(out, dpi = 150)
     print(f"Saved the stability plot to {out}")
 
