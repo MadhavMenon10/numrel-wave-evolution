@@ -6,7 +6,7 @@ from wave_tools import DATA_DIR, FIGURE_DIR, L2_error, L2_norm, check_run, exact
 
 DELTA_XS = [0.2, 0.1, 0.05, 0.025]
 COURANT_NUMBER = 0.5
-FINAL_TIME = 5.0
+FINAL_TIME = [5.0, 20.0]
 
 
 def measure_error(stencil_order, delta_x):
