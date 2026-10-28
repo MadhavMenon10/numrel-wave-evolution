@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 Grid::Grid(double L, double delta_x): L_(L), delta_x_(delta_x) {
-    if (L_ <= 0.0 || delta_x_ < 0.0) {
+    if (L_ <= 0.0 || delta_x_ <= 0.0) {
         throw std::runtime_error("L and/or delta_x must be positive");
     }
     N_ = static_cast<int>(std::lround(L_ / delta_x_));
