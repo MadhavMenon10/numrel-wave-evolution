@@ -1,4 +1,5 @@
 #include "stencils.hpp"
+#include <stdexcept>
 
 void Stencils::second_order(const std::vector<double>& field, std::vector<double>& out, const Grid& grid) {
     const int N {grid.get_N()};
