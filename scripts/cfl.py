@@ -45,7 +45,7 @@ def main():
         ax.semilogy(COURANT_NUMBERS, drawable, "o-", ms = 3, label = f"order {stencil_order}")
     ax.axhline(BLOWUP_THRESHOLD, color = "gray", lw = 1)
     ax.set_xlabel(r"Courant number $\lambda = \Delta t / \Delta x$")
-    ax.set_ylabel(r"largest $|\Phi|$ at $t \approx 100$")
+    ax.set_ylabel(rf"largest $|\Phi|$ at $t \approx {FINAL_TIME}$")
     ax.set_title("Stability scan")
     ax.grid(alpha = 0.3)
     ax.legend()
