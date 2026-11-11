@@ -8,7 +8,6 @@ DELTA_X = 0.1
 FINAL_TIME = 100.0
 COURANT_NUMBERS = np.round(np.arange(0.20, 2.001, 0.05), 4)
 BLOWUP_THRESHOLD = 10.0
-PREDICTED_LIMITS = {2: np.sqrt(2.0), 4: np.sqrt(1.5)}
 
 
 def largest_field_value(stencil_order, courant_number):
@@ -26,7 +25,6 @@ def largest_field_value(stencil_order, courant_number):
 
 def report_stability_limit(stencil_order, largest_values):
     is_stable = largest_values < BLOWUP_THRESHOLD
-    predicted = PREDICTED_LIMITS[stencil_order]
     if np.all(is_stable):
         print(f"Order {stencil_order} stencil: stable for every Courant number tested, up to {COURANT_NUMBERS[-1]}.")
         return
@@ -34,7 +32,6 @@ def report_stability_limit(stencil_order, largest_values):
     print(
         f"Order {stencil_order} stencil: stable up to a Courant number of "
         f"{COURANT_NUMBERS[first_unstable - 1]:.2f}, unstable from {COURANT_NUMBERS[first_unstable]:.2f} "
-        f"(predicted limit: {predicted:.4f})."
     )
 
 
@@ -46,11 +43,10 @@ def main():
         report_stability_limit(stencil_order, largest_values)
         drawable = np.minimum(np.where(np.isfinite(largest_values), largest_values, 1e12), 1e12)
         ax.semilogy(COURANT_NUMBERS, drawable, "o-", ms = 3, label = f"order {stencil_order}")
-        ax.axvline(PREDICTED_LIMITS[stencil_order], ls = ":", lw = 1)
     ax.axhline(BLOWUP_THRESHOLD, color = "gray", lw = 1)
     ax.set_xlabel(r"Courant number $\lambda = \Delta t / \Delta x$")
     ax.set_ylabel(r"largest $|\Phi|$ at $t \approx 100$")
-    ax.set_title("Stability scan (dotted lines: predicted limits)")
+    ax.set_title("Stability scan")
     ax.grid(alpha = 0.3)
     ax.legend()
     fig.tight_layout()
